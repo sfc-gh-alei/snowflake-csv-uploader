@@ -14,14 +14,13 @@
 import streamlit as st
 import pandas as pd
 from snowflake.connector.pandas_tools import write_pandas
-#import numpy as np
 
 # Import Connector for Snowflake Data Cloud!
 import snowflake.connector  #upm package(snowflake-connector-python==2.7.0)
 
 # Title information
 
-st.set_page_config(page_title="SnowLabs: CSV File Upload app", page_icon="🌀", layout="centered")
+st.set_page_config(page_title="SnowLabs: CSV File Upload app", page_icon="", layout="centered")
 
 # Make sure session state is preserved
 for key in st.session_state:
@@ -29,17 +28,17 @@ for key in st.session_state:
 
 st.title("Snowflake Labs: Uploading CSV file into Snowflake")
 st.sidebar.text("Connection info:")
-st.sidebar.text(f"Account: {st.secrets.sf_usage_app.account}")
+st.sidebar.text(f"Account: {st.secrets.snowflake.account}")
 
 # Initialize connection, using st.experimental_singleton to only run once.
 @st.experimental_singleton
 def init_connection():
     con = snowflake.connector.connect(
-        user=f"{st.secrets.sf_usage_app.user}",
-        password=f"{st.secrets.sf_usage_app.password}",
-        account=f"{st.secrets.sf_usage_app.account}",
-        role=f"{st.secrets.sf_usage_app.role}",
-        warehouse=f"{st.secrets.sf_usage_app.warehouse}",
+        user=f"{st.secrets.snowflake.user}",
+        password=f"{st.secrets.snowflake.password}",
+        account=f"{st.secrets.snowflake.account}",
+        role=f"{st.secrets.snowflake.role}",
+        warehouse=f"{st.secrets.snowflake.warehouse}",
     )
     con.cursor().execute("USE DATABASE UEBA")
     con.cursor().execute("USE SCHEMA UEBA.PUBLIC")
