@@ -12,7 +12,6 @@
 
 # Packages section
 import streamlit as st
-import openpyxl as xl
 import pandas as pd
 from snowflake.connector.pandas_tools import write_pandas
 
@@ -41,6 +40,7 @@ def init_connection():
         role=f"{st.secrets.snowflake.role}",
         warehouse=f"{st.secrets.snowflake.warehouse}",
     )
+    #con.cursor().execute("CREATE DATABASE IF NOT EXISTS UEBA")
     con.cursor().execute("USE DATABASE UEBA")
     con.cursor().execute("USE SCHEMA UEBA.PUBLIC")
     return con
@@ -58,16 +58,32 @@ conn = init_connection()
 #
 # Input: Choose a file from Desktop
 #
-
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.file_uploader("Choose a file. Accepted file types: .csv, .xlsx")
 if uploaded_file is not None:
-    # Can be used wherever a "file-like" object is accepted:
-    dataframe = pd.read_csv(uploaded_file)
-    #dataframe = xl.load_workbook(uploaded_file)
-    # Write the data from the DataFrame to the table named "accounts".
-    with st.spinner('Uploading file ...'):
-        success, nchunks, nrows, _ = write_pandas(conn, dataframe, 'TRANSACTIONS')
-    st.success("Success!")
+    # Validate file extension
+    file_name = uploaded_file.name
+    if not file_name.endswith(('.csv', '.xlsx')):
+        st.error('Wrong file type. Make sure it is one of: .csv, .xlsx')
+    else:
+        data_type_map = {
+            'INVOICE': 'str',
+            'STOCKCODE': 'str',
+            'DESCRIPTION': 'str',
+            'QUANTITY': 'int64',
+            'INVOICEDATE': 'str',
+            'PRICE': 'float64',
+            'CUSTOMERID': 'int64',
+            'COUNTRY': 'str'
+        }
+        if file_name.endswith('.csv'):
+            # Can be used wherever a "file-like" object is accepted:
+            dataframe = pd.read_csv(uploaded_file, dtype=data_type_map)
+        elif file_name.endswith('.xlsx'):
+            dataframe = pd.read_excel(uploaded_file, dtype=data_type_map)
+
+        with st.spinner('Uploading file ...'):
+            success, nchunks, nrows, _ = write_pandas(conn, dataframe, 'TRANSACTIONS')
+        st.success("Success!")
 
 
 

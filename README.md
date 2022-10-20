@@ -7,15 +7,30 @@ Snowflake CSV file uploader
 
 You will need the following:
 - Snowflake account. We highly recommend creating a trial account over any production accounts.
-- Snowflake role with `CREATE DATABASE` privilege. If using a trial account, the `SYSADMIN` role is sufficient for this demo.
+- Snowflake role with `CREATE DATABASE` privilege. If using a trial account, the `SYSADMIN` role is sufficient for this exercise.
 
 ### Set up Snowflake
 
-You will need to create 
+You will need to create a new database and table for the application to run. Log-on to your Snowflake account and run the following SQL:
+```
+create database if not exists UEBA;
+use schema UEBA.public;
 
-### Credentials
+create table if not exists transactions (
+    invoice bigint,
+    stockcode varchar,
+    description varchar,
+    quantity bigint,
+    invoicedate varchar,
+    price numeric,
+    customerid bigint,
+    country varchar
+);
+```
 
-Make a copy of the included `./.streamlit/secrets_example.toml` file:
+### Set up Credentials
+
+This sets up the connection from your Streamlit app to your Snowflake account. Make a copy of the included `./.streamlit/secrets_example.toml` file:
 ```
 cp ./.streamlit/secrets_example.toml ./.streamlit/secrets.toml
 ```
