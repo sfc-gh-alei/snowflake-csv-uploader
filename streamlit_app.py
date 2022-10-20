@@ -12,6 +12,7 @@
 
 # Packages section
 import streamlit as st
+import openpyxl as xl
 import pandas as pd
 from snowflake.connector.pandas_tools import write_pandas
 
@@ -62,10 +63,10 @@ uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     # Can be used wherever a "file-like" object is accepted:
     dataframe = pd.read_csv(uploaded_file)
-    st.write(dataframe)
+    #dataframe = xl.load_workbook(uploaded_file)
     # Write the data from the DataFrame to the table named "accounts".
     with st.spinner('Uploading file ...'):
-        success, nchunks, nrows, _ = write_pandas(conn, dataframe, 'ACCOUNTS')
+        success, nchunks, nrows, _ = write_pandas(conn, dataframe, 'TRANSACTIONS')
     st.success("Success!")
 
 
