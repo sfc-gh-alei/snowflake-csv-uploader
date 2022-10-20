@@ -9,6 +9,10 @@ You will need the following:
 - Snowflake account. We highly recommend creating a trial account over any production accounts.
 - Snowflake role with `CREATE DATABASE` privilege. If using a trial account, the `SYSADMIN` role is sufficient for this demo.
 
+### Set up Snowflake
+
+You will need to create 
+
 ### Credentials
 
 Make a copy of the included `./.streamlit/secrets_example.toml` file:
@@ -45,7 +49,7 @@ pip install -r requirements.txt
 
 Run your app
 ```
-streamlit run FileProcess.py
+streamlit run streamlit_app.py
 ```
 
 Assuming everything is run and configured correctly, you will be given a URL link to the app running
