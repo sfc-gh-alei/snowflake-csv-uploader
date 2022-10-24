@@ -17,7 +17,7 @@ create database if not exists UEBA;
 use schema UEBA.public;
 
 create table if not exists transactions (
-    invoice bigint,
+    invoice varchar,
     stockcode varchar,
     description varchar,
     quantity bigint,

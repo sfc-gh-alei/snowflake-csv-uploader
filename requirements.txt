@@ -4,3 +4,5 @@ streamlit==1.13.0
 snowflake-connector-python[pandas]
 pandas
 openpyxl==3.0.10
+streamlit-aggrid==0.3.3
+plotly==5.10.0
