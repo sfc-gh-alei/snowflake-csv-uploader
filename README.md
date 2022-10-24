@@ -1,5 +1,11 @@
 # snowflake-csv-uploader
-Snowflake CSV file uploader
+Snowflake spreadsheet uploader.
+
+This a demo showcasing various capabilities offered by deploying Streamlit applications on Snowflake:
+- Directly upload data from spreadsheets (.csv, .xlsx) into Snowflake
+- Visualisations
+- Data & file validation
+- Caching / Memoization
 
 ## Setup
 
@@ -7,26 +13,13 @@ Snowflake CSV file uploader
 
 You will need the following:
 - Snowflake account. We highly recommend creating a trial account over any production accounts.
-- Snowflake role with `CREATE DATABASE` privilege. If using a trial account, the `SYSADMIN` role is sufficient for this exercise.
+- Snowflake role with `CREATE DATABASE` and `CREATE TABLE` privileges. If using a trial account, the `SYSADMIN` role is sufficient for this exercise.
 
-### Set up Snowflake
+#### Please Note
 
-You will need to create a new database and table for the application to run. Log-on to your Snowflake account and run the following SQL:
-```
-create database if not exists UEBA;
-use schema UEBA.public;
-
-create table if not exists transactions (
-    invoice varchar,
-    stockcode varchar,
-    description varchar,
-    quantity bigint,
-    invoicedate varchar,
-    price numeric,
-    customerid bigint,
-    country varchar
-);
-```
+The Streamlit code creates a few objects within your Snowflake account:
+- A Database: `SNOWFLAKE_LAB_ONLINE_RETAIL`
+- A Table: `SNOWFLAKE_LAB_ONLINE_RETAIL.PUBLIC.TRANSACTIONS`
 
 ### Set up Credentials
 
