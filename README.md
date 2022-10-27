@@ -15,6 +15,12 @@ You will need the following:
 - Snowflake account. We highly recommend creating a trial account over any production accounts.
 - Snowflake role with `CREATE DATABASE` and `CREATE TABLE` privileges. If using a trial account, the `SYSADMIN` role is sufficient for this exercise.
 
+If running this on your own machine, you will need *either*:
+- Python3.8
+- Docker
+
+Code and deployment has been tested and verified on [Gitpod](https://gitpod.io)
+
 #### Please Note
 
 The Streamlit code creates a few objects within your Snowflake account:
@@ -50,9 +56,15 @@ Assuming everything is run and configured correctly, you will be given a URL lin
 
 ### Option 2: Python
 
-Install required packages via:
+*(Optional, but recommended)* Create a virtualenv
 ```
-pip install -r requirements.txt
+python3 -m venv ./snowflake-csv-uploader-env
+source ./snowflake-csv-uploader-env/bin/activate
+```
+
+Install required packages:
+```
+pip3 install -r requirements.txt
 ```
 
 Run your app
