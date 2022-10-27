@@ -1,8 +1,7 @@
-# snowflake-csv-uploader
-Snowflake spreadsheet uploader.
+# Snowflake Spreadsheet Uploader
 
-This a demo showcasing various capabilities offered by deploying Streamlit applications on Snowflake:
-- Directly upload data from spreadsheets (.csv, .xlsx) into Snowflake
+This a demo showcasing various capabilities of Streamlit applications built on Snowflake:
+- Directly upload data from spreadsheets (.csv, .xlsx) into Snowflake tables
 - Visualisations
 - Data & file validation
 - Caching / Memoization
