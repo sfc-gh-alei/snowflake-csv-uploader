@@ -81,6 +81,8 @@ conn = init_connection()
 clear_tbl = st.sidebar.button('Clear Snowflake Table Data')
 if clear_tbl:
     conn.cursor().execute("TRUNCATE TABLE TRANSACTIONS")
+    # Clear memo cache
+    st.experimental_memo.clear()
 
 
 #
@@ -120,6 +122,8 @@ with tab1:
                 if upload_btn:
                     with st.spinner('Uploading file ...'):
                         success, nchunks, nrows, _ = write_pandas(conn, df, 'TRANSACTIONS')
+                    # Clear memo cache
+                    st.experimental_memo.clear()
                     st.success("Success!", icon="✅")
 
             # Generate a table of the data that's been staged for the uploader to view 
