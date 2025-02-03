@@ -1,5 +1,5 @@
 # requirements.txt
-snowflake-connector-python==2.7.6
+snowflake-connector-python>=3.13.1
 streamlit==1.13.0
 snowflake-connector-python[pandas]
 pandas
